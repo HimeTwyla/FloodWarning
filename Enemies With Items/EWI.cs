@@ -56,7 +56,7 @@ None
 
             IL.RoR2.CombatDirector.AttemptSpawnOnTarget += il =>
             {
-
+                ///Error seems to come from target spawn
                 var cursor = il.At(0);
 
                 cursor.GotoNext(x => x.MatchStloc(8));
