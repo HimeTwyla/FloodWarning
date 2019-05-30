@@ -1,4 +1,4 @@
-﻿using BepInEx;
+using BepInEx;
 using RoR2;
 using UnityEngine;
 using System.Collections.Generic;
@@ -65,8 +65,8 @@ namespace R2API
         public void Awake()//Code that runs when the game starts
         {
 
-            List<RuleDef> allRuleDefs = (List<RuleDef>)Harmony.AccessTools.Field(Harmony.AccessTools.TypeByName("RuleCatalog"), "allRuleDefs").GetValue(null);
-            List<RuleChoiceDef> allChoicesDefs = (List<RuleChoiceDef>)Harmony.AccessTools.Field(Harmony.AccessTools.TypeByName("RuleCatalog"), "allChoicesDefs").GetValue(null);
+            List<RuleDef> allRuleDefs = (List<RuleDef>)HarmonyLib.AccessTools.Field(HarmonyLib.AccessTools.TypeByName("RuleCatalog"), "allRuleDefs").GetValue(null);
+            List<RuleChoiceDef> allChoicesDefs = (List<RuleChoiceDef>)HarmonyLib.AccessTools.Field(HarmonyLib.AccessTools.TypeByName("RuleCatalog"), "allChoicesDefs").GetValue(null);
 
             for (int k = 0; k < allRuleDefs.Count; k++)
             {
@@ -89,14 +89,14 @@ namespace R2API
 
             On.RoR2.UI.RuleChoiceController.OnClick += (orig, self) =>
             {
-                RuleChoiceDef myChoiceDef = (RuleChoiceDef)Harmony.AccessTools.Field(Harmony.AccessTools.TypeByName("RoR2.UI.RuleChoiceController"), "currentChoiceDef").GetValue(self);
+                RuleChoiceDef myChoiceDef = (RuleChoiceDef)HarmonyLib.AccessTools.Field(HarmonyLib.AccessTools.TypeByName("RoR2.UI.RuleChoiceController"), "currentChoiceDef").GetValue(self);
                 myChoiceDef.ruleDef.defaultChoiceIndex = myChoiceDef.localIndex;
                 orig(self);
             };
 
-          
-            Harmony.AccessTools.Field(Harmony.AccessTools.TypeByName("RuleCatalog"), "allRuleDefs").SetValue(null, allRuleDefs);
-            Harmony.AccessTools.Field(Harmony.AccessTools.TypeByName("RuleCatalog"), "allChoicesDefs").SetValue(null, allChoicesDefs);
+
+            HarmonyLib.AccessTools.Field(HarmonyLib.AccessTools.TypeByName("RuleCatalog"), "allRuleDefs").SetValue(null, allRuleDefs);
+            HarmonyLib.AccessTools.Field(HarmonyLib.AccessTools.TypeByName("RuleCatalog"), "allChoicesDefs").SetValue(null, allChoicesDefs);
             RuleCatalog.availability.MakeAvailable();
         }
     }
